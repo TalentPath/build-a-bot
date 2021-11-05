@@ -12,8 +12,17 @@ const a = async() => {
     let resp = '';
     while(input.toLowerCase() != 'quit'){
         input = prompt('');
-        resp = await talkToBot(input);
-        console.log(resp.cnt);
+
+        switch(input){
+            case 'weather':
+                break;
+            default:
+                resp = await talkToBot(input);
+                console.log(`
+                    Bot: ${resp.cnt}
+                `);
+                break;
+        }
     }
 }
 
