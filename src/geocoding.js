@@ -28,5 +28,3 @@ const getCoords = async() => {
 }
 
 module.exports = {getCoords}
-
-getCoords();
