@@ -1,5 +1,6 @@
 const prompt = require('prompt-sync')();
 const { talkToBot } = require('./talkToBot');
+const { getTopic } = require('./getTopic');
 
 let input = '';
 
@@ -9,12 +10,19 @@ const a = async() => {
     Enter 'quit' to exit. :(
     `);
 
-    let resp = '';
+    let resp = '', topic = '';
     while(input.toLowerCase() != 'quit'){
-        input = prompt('');
+        input = prompt('How can I help: ');
 
-        switch(input){
+        //console.log(input.search("weather"));
+        if(input.search("weather") >= 0){
+            topic = "weather";
+        }
+
+        switch(topic){
             case 'weather':
+                resp = await getTopic(input);
+                console.log(resp)
                 break;
             default:
                 resp = await talkToBot(input);
