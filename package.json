@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "m3o": "^1.0.649",
+    "prompt-sync": "^4.2.0"
+  }
+}
