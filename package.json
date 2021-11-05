@@ -1,0 +1,24 @@
+{
+  "name": "build-a-bot",
+  "version": "1.0.0",
+  "description": "Work with your team to build a bot (command line app)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatoGMTP/build-a-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatoGMTP/build-a-bot/issues"
+  },
+  "homepage": "https://github.com/PatoGMTP/build-a-bot#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
