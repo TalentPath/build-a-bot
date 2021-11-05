@@ -23,13 +23,14 @@ const getQuestions = async () => {
     }
     
     let questions = await axios.get(`https://opentdb.com/api.php?amount=5&category=${categories[category]}&difficulty=${difficulty}`)
-        
     questions = questions.data.results;
     questions.forEach(item => {
         item.question = item.question.replaceAll('&quot;', '')
-            .replaceAll('&#039;', "'")});
+            .replaceAll('&#039;', "'")
+    })
+
     return questions;
-}
+}    
 
 module.exports = {
     getQuestions
