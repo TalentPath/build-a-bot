@@ -1,5 +1,6 @@
 const prompt = require('prompt-sync')();
 const { talkToBot } = require('./talkToBot');
+const { getCoords } = require('./geocoding');
 
 let input = '';
 
@@ -15,6 +16,9 @@ const a = async() => {
 
         switch(input){
             case 'weather':
+                break;
+            case 'location':
+                getCoords();
                 break;
             default:
                 resp = await talkToBot(input);
