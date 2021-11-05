@@ -18,7 +18,7 @@ const a = async() => {
             case 'weather':
                 break;
             case 'location':
-                getCoords();
+                resp = await getCoords();
                 break;
             default:
                 resp = await talkToBot(input);
