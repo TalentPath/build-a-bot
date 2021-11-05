@@ -1,8 +1,8 @@
-const shuffler = (arr) => {
+const shuffler = () => {
     const indexArr = [];
-    const length = arr.length;
-    while (indexArr.length < length) {
-      const randomIndex = Math.floor(Math.random() * length);
+   
+    while (indexArr.length < 4) {
+      const randomIndex = Math.floor(Math.random() * 4);
       
       if (!indexArr.includes(randomIndex)) {
           indexArr.push(randomIndex);
