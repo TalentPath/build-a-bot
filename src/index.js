@@ -19,6 +19,7 @@ const a = async() => {
                 break;
             case 'location':
                 resp = await getCoords();
+                console.log(resp);
                 break;
             default:
                 resp = await talkToBot(input);

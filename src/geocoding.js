@@ -12,17 +12,17 @@ const getCoords = async() => {
           
   let response = await axios.request(apiAddr);
 
-  console.log(response.data.results.length);
-  response.data.results.forEach(place => {
-    console.log(place.name, place.country, place.latitude, place.longitude)
-  });
+  // console.log(response.data.results.length);
+  // response.data.results.forEach(place => {
+  //   console.log(place.name, place.country, place.latitude, place.longitude)
+  // });
 
   let latitude = response.data.results[0].latitude;
   let longitude = response.data.results[0].longitude;
 
-  let something = await getStation(latitude, longitude);
-    
-
+  let response2 = await getStation(latitude, longitude);
+  
+  return response2;
 }
 
 module.exports = {getCoords}
