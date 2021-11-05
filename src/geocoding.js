@@ -2,11 +2,11 @@ const axios = require("axios").default;
 const prompt = require('prompt-sync')();
 const { getStation } = require("./usweather.js");
 
-const getCoords = async() => {
+const getCoords = async(location) => {
   
-  let location = "";
+  //let location = "";
 
-  location = prompt("Please enter a location: ");
+  //location = prompt("Please enter a location: ");
 
   apiAddr = `https://geocoding-api.open-meteo.com/v1/search?name=${location}`;
           

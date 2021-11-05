@@ -1,34 +1,60 @@
 const prompt = require('prompt-sync')();
 const { talkToBot } = require('./talkToBot');
+const { getTopic } = require('./getTopic');
 const { getCoords } = require('./geocoding');
 
-let input = '';
+let input = '', record = '';
+const GREETING = `
+        Hi, I'm your friendly chat-bot. Send me a message to get started.
+        Enter 'quit' to exit. :(
+        `,
+        BUFF = 'How can I help: ', WAIT = `
+        hmmmm...sorry for the wait
+        `;
 
-const a = async() => {
-    console.log(`
-    Hi, I'm your friendly chat-bot. Send me a message to get started.
-    Enter 'quit' to exit. :(
-    `);
+const chat = async (message, promptFlag=false) => {
+    record += message;
+    if(promptFlag){
+        let result = prompt(message)
+        record += result;
+        return result;
+    }
+    console.log(message);
+}
 
-    let resp = '';
+const start = async() => {
+    
+    chat(GREETING);
+
+    let resp = '', topic = '';
     while(input.toLowerCase() != 'quit'){
-        input = prompt('');
+        topic = ''
+        input = await chat(BUFF, true);
 
-        switch(input){
+        if(input.search("weather") >= 0){
+            topic = "weather";
+        }
+
+        switch(topic){
             case 'weather':
-                break;
-            case 'location':
-                resp = await getCoords();
-                console.log(resp);
+                let loc = await getTopic(input);
+                chat(WAIT);
+                resp = await getCoords(loc);
+                chat(`
+                    Bot: ${`Weather in ${loc}`}
+                    Bot: ${`Current condition: ${resp.text} | Current temprature: ${resp.temperature} Fahrenheit`}
+                `);
                 break;
             default:
                 resp = await talkToBot(input);
-                console.log(`
+                chat(`
                     Bot: ${resp.cnt}
                 `);
                 break;
         }
     }
+    console.log(record)
 }
 
-a();
+start();
+
