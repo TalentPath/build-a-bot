@@ -18,7 +18,10 @@ const playGame = async () => {
         console.log(`c. ${answers.c}`);
         console.log(`d. ${answers.d}\n`);
     
-        const userAnswer = prompt('Choose the correct letter: ').toLowerCase();
+        let userAnswer = prompt('Choose the correct letter: ').toLowerCase();
+        while(!answers[userAnswer]) {
+            userAnswer = prompt('Answer must be a, b, c or d. Guess again: ');
+        }
         if (answers[userAnswer] === currentQuestion.correct_answer) {
             score++;
             console.log('You are correct');
