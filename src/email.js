@@ -33,7 +33,7 @@
 // });
 
 
-const sendEmail = async(message, receiver) =>
+const sendEmail = async(message, receiver="pgarcia@talentpath.com") =>
 {
     // const SibApiV3Sdk = require('sib-api-v3-sdk');
     // let defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -71,12 +71,12 @@ const msg = {
   from: 'patriciopato117@gmail.com', // Change to your verified sender
   subject: 'Bot Receipt',
   text: message,
-  html: '<strong>Goodbye!</strong>',
+  html: message,
 }
 sgMail
   .send(msg)
   .then(() => {
-    console.log('Email sent')
+    console.log('Email sent!')
   })
   .catch((error) => {
     console.error(error)

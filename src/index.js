@@ -2,6 +2,7 @@ const prompt = require('prompt-sync')();
 const { talkToBot } = require('./talkToBot');
 const { getTopic } = require('./getTopic');
 const { getCoords } = require('./geocoding');
+const { sendEmail } = require('./email');
 
 let input = '', record = '';
 const GREETING = `
@@ -53,7 +54,9 @@ const start = async() => {
                 break;
         }
     }
-    console.log(record)
+    // console.log(record)
+    let receiver = prompt("Please enter an email address: ");
+    let finalResponse = await sendEmail(record, receiver);
 }
 
 start();
