@@ -33,33 +33,54 @@
 // });
 
 
-const sendEmail = async(message) =>
+const sendEmail = async(message, receiver) =>
 {
-    const SibApiV3Sdk = require('sib-api-v3-sdk');
-    let defaultClient = SibApiV3Sdk.ApiClient.instance;
+    // const SibApiV3Sdk = require('sib-api-v3-sdk');
+    // let defaultClient = SibApiV3Sdk.ApiClient.instance;
 
-    let apiKey = defaultClient.authentications['api-key'];
-    apiKey.apiKey = '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';
+    // let apiKey = defaultClient.authentications['api-key'];
+    // apiKey.apiKey = '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';
 
-    let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+    // let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-    let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    // let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
-    sendSmtpEmail.subject = "My {{params.subject}}";
-    sendSmtpEmail.htmlContent = message;
-    sendSmtpEmail.sender = {"name":"John Doe","email":"example@example.com"};
-    sendSmtpEmail.to = [{"email":"patriciogm@live.com","name":"PG"}];
-    sendSmtpEmail.cc = [{"email":"example2@example2.com","name":"Janice Doe"}];
-    sendSmtpEmail.bcc = [{"email":"John Doe","name":"example@example.com"}];
-    sendSmtpEmail.replyTo = {"email":"replyto@domain.com","name":"John Doe"};
-    sendSmtpEmail.headers = {"Some-Custom-Name":"unique-id-1234"};
-    sendSmtpEmail.params = {"parameter":"My param value","subject":"New Subject"};
+    // sendSmtpEmail.subject = "My {{params.subject}}";
+    // sendSmtpEmail.htmlContent = message;
+    // sendSmtpEmail.sender = {"name":"John Doe","email":"example@example.com"};
+    // sendSmtpEmail.to = [{"email":"patriciogm@live.com","name":"PG"}];
+    // sendSmtpEmail.cc = [{"email":"example2@example2.com","name":"Janice Doe"}];
+    // sendSmtpEmail.bcc = [{"email":"John Doe","name":"example@example.com"}];
+    // sendSmtpEmail.replyTo = {"email":"replyto@domain.com","name":"John Doe"};
+    // sendSmtpEmail.headers = {"Some-Custom-Name":"unique-id-1234"};
+    // sendSmtpEmail.params = {"parameter":"My param value","subject":"New Subject"};
 
-    apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-    console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-    }, function(error) {
-    console.error(error);
-    });
+    // apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
+    // console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+    // }, function(error) {
+    // console.error(error);
+    // });
+
+    // using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+// javascript
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const msg = {
+  to: receiver, // Change to your recipient
+  from: 'patriciopato117@gmail.com', // Change to your verified sender
+  subject: 'Bot Receipt',
+  text: message,
+  html: '<strong>Goodbye!</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
 }
 
 module.exports = { sendEmail}
